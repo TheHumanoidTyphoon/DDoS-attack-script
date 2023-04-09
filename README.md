@@ -3,12 +3,12 @@
 This script is a DDoS (Distributed Denial of Service) attack tool that can be used to test the resilience of a network against a DDoS attack. It works by sending a large number of requests to a target server or IP address, with the aim of overwhelming its resources and causing it to become unavailable.
 
 ## Requirements:
-- Python 3.x
-- argparse
-- socket
-- concurrent.futures
-- logging
-- secrets
+- `Python 3.x`
+- `argparse`
+- `socket`
+- `concurrent.futures`
+- `logging`
+- `secrets`
 ## Usage:
 The script can be executed from the command line using the following command:
 ```python
