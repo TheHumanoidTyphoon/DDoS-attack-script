@@ -28,6 +28,6 @@ The script logs all errors and connection attempts to a file named attack.log in
 
 ## Example
 ```python
-python3 ddos_attack.py 192.168.0.1,192.168.0.2,192.168.0.3 80 192.168.0.4 TCP_SYN --duration 120 --threads 100
+python ddos_attack.py 192.168.0.1,192.168.0.2,192.168.0.3 80 192.168.0.4 TCP_SYN --duration 120 --threads 100
 ```
 This command launches a `TCP SYN` flood attack against the IP addresses `192.168.0.1`, `192.168.0.2`, and `192.168.0.3`, using port `80` and a fake IP address of `192.168.0.4`. The attack will last for 120 seconds and use a maximum of 100 threads.
