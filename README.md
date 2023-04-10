@@ -12,7 +12,7 @@ This script is a DDoS (Distributed Denial of Service) attack tool that can be us
 ## Usage:
 The script can be executed from the command line using the following command:
 ```python
-python3 ddos_attack.py [targets] [port] [fake_ip] [attack_type] [--duration] [--threads]
+python ddos_attack.py [targets] [port] [fake_ip] [attack_type] [--duration] [--threads]
 ```
 - `targets`: A comma-separated list of target IP addresses.
 - `port`: The target port number.
