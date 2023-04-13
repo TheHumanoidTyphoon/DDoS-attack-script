@@ -10,6 +10,16 @@ TOKEN_CAPACITY = 10  # Maximum 10 tokens can be stored in the bucket
 
 class Attack:
     def __init__(self, target, port, fake_ip, attack_type, duration):
+        """
+        Class representing a DDoS attack.
+
+        Args:
+            target (str): The target IP address.
+            port (int): The target port number.
+            fake_ip (str): The fake IP address to use in the attack.
+            attack_type (str): The type of attack to perform.
+            duration (int): The duration of the attack in seconds.
+        """
         self.target = target
         self.port = port
         self.fake_ip = fake_ip
@@ -23,6 +33,19 @@ class Attack:
         self.logger.addHandler(self.handler)
 
     def start_attack(self):
+        """
+        Starts the DDoS attack by sending packets to the target server using the specified attack type.
+
+        This function sends packets to the target server using the attack type specified in the `attack_type` attribute of
+        the DDoS object. The packets are sent repeatedly until the `duration` attribute is reached. A rate limiter is used to
+        control the rate at which packets are sent, so as not to overwhelm the target server.
+
+        Raises:
+            No exceptions are raised.
+
+        Returns:
+            None.
+        """
         start_time = time.time()
         last_request_time = start_time
         tokens = 0
@@ -71,6 +94,21 @@ class Attack:
                 self.logger.error(f"Error: {str(e)}")
 
     def _rate_limiter(self, tokens, last_request_time, retries=0):
+        """
+        Limits the rate of requests made to the server.
+
+        Args:
+            tokens (float): The current number of tokens in the bucket.
+            last_request_time (float): The time of the last request made.
+            retries (int): The number of times to retry the connection if it fails (default 0).
+
+        Returns:
+            tuple: A tuple containing the updated token count and last request time.
+
+        Raises:
+            Exception: If the connection fails after 5 retries.
+
+        """
         # Calculate the time elapsed since the last request
         time_since_last_request = time.time() - last_request_time
 
@@ -105,6 +143,20 @@ class Attack:
                 return tokens, last_request_time
 
 def launch_attack(targets, port, fake_ip, attack_type, duration):
+    """
+    Launches a DDoS attack on the specified targets.
+
+    Args:
+        targets (list): A list of IP addresses to target.
+        port (int): The port number to target.
+        fake_ip (str): The fake IP address to use in the attack.
+        attack_type (str): The type of attack to launch.
+        duration (int): The duration of the attack in seconds (default 60).
+
+    Returns:
+        None
+
+    """
     for target in targets:
         attack = Attack(target, port, fake_ip, attack_type, duration)
         attack.start_attack()
